@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Todos {% endblock %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    {% else %}
+        <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
+    {% endif %}
+
+    <div class="card">
+        {% for todo in todos %}
+            <a href="{% url 'detail' todo.id %}" class="card-body">{{ todo.title }}</a><br>
+        {% endfor %}
+    </div>
+    <a href="{% url 'create' %}" class="btn btn-primary">Add todo</a>
+   
+{% endblock %}
